@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendora - cosmetique</title>
+    <link rel="stylesheet" href="vendora.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+</head>
+<body>
+<header>
+    
+        <img class="logo" src="logo1.png" alt="">
+
+        <ul class="navbar">
+            <li><a href="#"> Acceuil</a></li>
+            <li><a href="#"> A propos</a></li>
+            <li><a href="#"> Produits</a></li>
+            <li><a href="#"> Contact </a></li>
+            <a href="#" class="btn-commander">Commander</a>
+        </ul>
+        
+</header>
+<section class="panier" id="panier">
+    <div class="contenu">
+        <h2>Harmonie Cosmétique</h2>
+        <p>Nous proposons un large choix de produits de beauté harmonieux, éclairant, protégeant et tonifiant.</p>
+        <a href="#" class="btn1">Notre produits</a>
+        <a href="#" class="btn2">L'offre de promotion</a>
+    </div>
+</section>
+<section class="apropos" id="apropos">
+    <div class="row">
+        <div class="col50">
+           <h2 class="titre-texte"><span>A</span> Propos De Nous</h2> 
+            <br>
+           <p>Plongez dans un monde où la beauté prend un nouveau sens. Chez Vendora, chaque produit est pensé <br>pour révéler votre éclat naturel tout en respectant votre peau et la planète.<br>
+                <br>
+                Nous combinons le meilleur de la nature et de la science pour vous offrir des soins efficaces, sensoriels et éthiques.<br> Avec des formules inspirées par la pureté et conçues avec passion, Vendora redéfinit la cosmétique en mettant l’accent sur ce qui compte vraiment : vous.
+                <br><br>
+                Explorez nos créations et laissez votre beauté s'exprimer, simplement et en toute confiance. Vendora, votre allié beauté au naturel.
+            </p>
+        </div>
+        <div class="col50">
+            <div class="img">
+                <img src=" ./images/Introduction.jpg" alt="image">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="produit" id="produit">
+    <div class="titre">
+        <h2 class="titre-texte"><span>P</span>roduits</h2>
+        <br>
+        <p>Voici un échantillon de nos produits harmonieux, éclairants, protégeants et tonifiants.</p>
+    </div>
+    <div class="contenu">
+       <div class="box">
+            <div class="inbox">
+                <img src="./images/produit1.png" alt="">
+            </div>
+            <div class="text">
+                <h3>Sérum Hydratant</h3>
+            </div>
+       </div>
+    
+       <div class="box">
+        <div class="inbox">
+            <img src="./images/produit2.png" alt="">
+        </div>
+        <div class="text">
+            <h3>Gamme De Sérum</h3>
+        </div>
+       </div>
+       <div class="box">
+        <div class="inbox">
+            <img src="./images/produit3.png" alt="">
+        </div>
+        <div class="text">
+            <h3>Créme De Nuit</h3>
+        </div>
+       </div>
+    
+       <div class="box">
+        <div class="inbox">
+            <img src="./images/produit4.png" alt="">
+        </div>
+        <div class="text">
+            <h3>Créme Naturel</h3>
+        </div>
+       </div>
+ </div>
+ <div class="titre">
+    <a href="#" class="btn1">Voir Plus</a>
+ </div>
+</section>
+<section>
+    <h2 class="titre-texte1"><span>C</span>ontact</h2>
+  <form id="orderForm">
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" required>
+
+    <label for="prenom">Prénom :</label>
+    <input type="text" id="prenom" required>
+
+    <label for="email">Adresse email :</label>
+    <input type="email" id="email" required>
+
+    <label for="ville">Ville :</label>
+    <select id="ville" onchange="updateCodePostal()" required>
+      <option value="">--Sélectionnez une ville--</option>
+      <option value="10000">Rabat</option>
+      <option value="20000">Casablanca</option>
+      <option value="30000">Fès</option>
+      <option value="40000">Marrakech</option>
+    </select>
+
+    <label for="codePostal">Code Postal :</label>
+    <input type="text" id="codePostal" readonly>
+
+    <label for="telephone">Numéro de téléphone :</label>
+    <input type="tel" id="telephone" maxlength="10" pattern="\\d{10}" placeholder="Ex : 0612345678" required>
+
+    <label for="quantite">Quantité de produit :</label>
+    <input type="number" id="quantite" min="1" value="0" required onchange="calculateTotal()">
+
+    <label for="total">Total (MAD) :</label>
+    <input type="text" id="total" readonly value="0">
+
+    <button type="button" onclick="validateOrder()">Commander</button>
+  </form>
+
+  <script>
+    const prixUnitaire = 100; // Prix d'un produit (en MAD)
+
+    function updateCodePostal() {
+      const ville = document.getElementById("ville");
+      const codePostal = document.getElementById("codePostal");
+      codePostal.value = ville.value; // Récupère le code postal associé à la ville sélectionnée
+    }
+
+    function calculateTotal() {
+      const quantite = document.getElementById("quantite").value;
+      const total = document.getElementById("total");
+      total.value = quantite * prixUnitaire; // Calcule le total
+    }
+
+    function validateOrder() {
+      const nom = document.getElementById("nom").value;
+      const prenom = document.getElementById("prenom").value;
+      const email = document.getElementById("email").value;
+      const ville = document.getElementById("ville").value;
+      const telephone = document.getElementById("telephone").value;
+
+      if (!nom || !prenom || !email || !ville || telephone.length !== 10) {
+        alert("Veuillez remplir tous les champs correctement.");
+        return;
+      }
+
+      alert("Votre commande est bien validée !");
+    }
+  </script>
+</section>
+<footer>
+    <div class="footer-container">
+        <div class="footer-section about">
+            <h3>Vendora</h3>
+            <p>Chez Vendora, nous célébrons la beauté naturelle avec des produits respectueux de votre peau et de la planète.</p>
+        </div>
+        <div class="footer-section links">
+            <h3>Liens Rapides</h3>
+            <ul>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#apropos">À propos</a></li>
+                <li><a href="#produit">Produits</a></li>
+                <li><a href="#panier">Commander</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-section contact">
+            <h3>Contact</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Rabat, Maroc</p>
+            <p><i class="fas fa-phone"></i> +212 6 99 83 12 28</p>
+            <p><i class="fas fa-envelope"></i> contact@vendora.com</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Vendora. Tous droits réservés.</p>
+    </div>
+</footer>
+
+</body>
+</html>
